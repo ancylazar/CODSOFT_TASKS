@@ -1,0 +1,2 @@
+import { prisma } from "@/lib/prisma";
+export default async function Results(){const data=await prisma.result.findMany({include:{student:true},orderBy:{id:"desc"}});return <main className="shell"><a href="/">← Dashboard</a><h1>Examination Results</h1><div className="tableWrap"><table><thead><tr><th>Student</th><th>Subject</th><th>Marks</th><th>Grade</th></tr></thead><tbody>{data.map(r=><tr key={r.id}><td>{r.student.name}</td><td>{r.subject}</td><td>{r.marks}</td><td>{r.grade}</td></tr>)}</tbody></table></div></main>}

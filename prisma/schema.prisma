@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+}
+
+model Student {
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String       @unique
+  phone       String?
+  course      String
+  year        Int
+  createdAt   DateTime     @default(now())
+  attendance  Attendance[]
+  results     Result[]
+}
+
+model Teacher {
+  id          Int          @id @default(autoincrement())
+  name        String
+  email       String       @unique
+  subject     String
+  createdAt   DateTime     @default(now())
+}
+
+model Attendance {
+  id        Int              @id @default(autoincrement())
+  date      DateTime         @default(now())
+  status    AttendanceStatus
+  studentId Int
+  student   Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
+
+model Result {
+  id        Int      @id @default(autoincrement())
+  subject   String
+  marks     Int
+  grade     String
+  studentId Int
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
