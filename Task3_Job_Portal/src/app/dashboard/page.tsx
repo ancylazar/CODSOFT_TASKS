@@ -1,0 +1,7 @@
+ "use client";
+import Navbar from "@/components/Navbar";
+import { jobs } from "@/lib/data";
+
+export default function Dashboard() {
+  return <><Navbar /><main className="dashboard"><div className="dashHeader"><div><div className="eyebrow">CANDIDATE DASHBOARD</div><h1>Good morning, Maya 👋</h1><p>Here’s what’s happening with your job search.</p></div><button>Complete profile · 82%</button></div><div className="dashStats"><div><b>12</b><span>Saved jobs</span></div><div><b>6</b><span>Applications</span></div><div><b>3</b><span>Interviews</span></div><div><b>82%</b><span>Profile complete</span></div></div><section className="dashSection"><div className="sectionHead"><h2>Application activity</h2><span>Last 30 days</span></div><div className="activity"><div className="timelineItem"><i>✓</i><div><b>Senior Frontend Engineer</b><span>NovaLabs · Shortlisted</span></div><em>2 days ago</em></div><div className="timelineItem"><i>↗</i><div><b>Product Designer</b><span>PixelForge · Application sent</span></div><em>5 days ago</em></div><div className="timelineItem"><i>✓</i><div><b>Backend Engineer</b><span>CloudSprint · Application sent</span></div><em>1 week ago</em></div></div></section><section className="dashSection"><div className="sectionHead"><h2>Recommended for you</h2><a href="/jobs">Browse all →</a></div><div className="jobGrid">{jobs.slice(0,3).map(j => <div className="miniJob" key={j.id}><div className="companyLogo">{j.logo}</div><b>{j.title}</b><span>{j.company} · {j.location}</span><strong>{j.salary}</strong></div>)}</div></section></main></>;
+}
